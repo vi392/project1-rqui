@@ -12,12 +12,13 @@ app.use(express.json());
 // import routes for TODO API
 
 const todoRoutes = require("./routes/todos");
+
 //mount the todo AsPi routes
 app.use("/api/v1",todoRoutes);
 
 // start server
 app.listen(PORT, () =>{
-    console.log('Server started successfully at ${PORT}');
+    console.log(`Server started successfully at ${PORT}`);
 });
 
 // CONNECT DB
