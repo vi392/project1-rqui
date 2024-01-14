@@ -1,21 +1,26 @@
-
 //  import the module.
 const Todo = require("../modules/todo");
 
 // define route handler.
-exports.getTodo = async(req,res) => {
+exports.updateTodo = async(req,res) => {
     try{
-        // featch all item from database.
-         const todos = await Todo.find({});
-      // response.
+        const {id} =req.params;
+        const {title ,description} = req.body;
+
+        const todo = await Todo.findByIdAndUpdate(
+           {_id:id},
+           {title,description,updateAt:Date.now()},
+
+        )
+        // response.
       res.status(200)
       .json(
         {
             success:true,
-            todos,
-            message:'Entry Created Successfully'
+            Data:todo,
+            message:'updated Successfully',
 
-   }
+        }
       );
         
     }

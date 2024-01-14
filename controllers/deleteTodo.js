@@ -1,25 +1,25 @@
-
 //  import the module.
 const Todo = require("../modules/todo");
 
 // define route handler.
-exports.getTodo = async(req,res) => {
+exports.deleteTodo = async(req,res) => {
     try{
-        // featch all item from database.
-         const todos = await Todo.find({});
-      // response.
+        const {id} =req.params;
+
+        await Todo.findByIdAndDelete(id);
+        // response.
       res.status(200)
       .json(
         {
             success:true,
-            todos,
-            message:'Entry Created Successfully'
+            message:'deleted Successfully',
 
-   }
+        }
       );
-        
+           
     }
     catch(err){
+        
         console.error(err);
         // console.log(err);
         res.status(500)
