@@ -32,3 +32,39 @@ exports.getTodo = async(req,res) => {
         );
     }
 }
+
+exports.getTodoById = async(req,res) =>{
+
+    try{
+     // extract todo items basis of id.
+     const id =req.params.id;
+     const todo =await Todo.findById({_id:id})
+
+     // data forgiven id not found.
+     if(!todo){
+        return res.status(400).json({
+            success:false,
+            message:"No data found wort given id",
+        })
+     }
+     // data for given id found.
+     res.status(200).json({
+        success:true,
+        data:todo,
+        message:"todo ${id} data successfully fetched",
+     })
+        
+    }
+    catch(err){
+        console.error(err);
+        // console.log(err);
+        res.status(500)
+        .json(
+            {
+                success:false,
+                 error:"internal server error",
+                message: "server error", 
+            }
+        );
+    }
+}
