@@ -36,7 +36,7 @@ exports.getTodo = async(req,res) => {
 exports.getTodoById = async(req,res) =>{
 
     try{
-     // extract todo items basis of id.
+     // featch item in database with the help of id.
      const id =req.params.id;
      const todo =await Todo.findById({_id:id})
 
